@@ -57,17 +57,17 @@ export class CharacteristicMock extends EventTarget implements BluetoothRemoteGA
     }
 
     public writeValue(value: ArrayBuffer) {
-        this.value = new DataView(new Uint8Array(value));
+        this.value = new DataView(new Uint8Array(value).buffer);
         return Promise.resolve();
     }
 
     public writeValueWithResponse(value: ArrayBuffer) {
-        this.value = new DataView(new Uint8Array(value));
+        this.value = new DataView(new Uint8Array(value).buffer);
         return Promise.resolve();
     }
 
     public writeValueWithoutResponse(value: ArrayBuffer) {
-        this.value = new DataView(new Uint8Array(value));
+        this.value = new DataView(new Uint8Array(value).buffer);
         return Promise.resolve();
     }
 
