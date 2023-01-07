@@ -24,7 +24,7 @@ function normalizeUuid(service: BluetoothServiceUUID): string {
 }
 
 export class CharacteristicMock extends EventTarget implements BluetoothRemoteGATTCharacteristic {
-    public value: ArrayBuffer;
+    public value: DataView;
     public properties = {
         authenticatedSignedWrites: false,
         broadcast: false,
@@ -41,7 +41,7 @@ export class CharacteristicMock extends EventTarget implements BluetoothRemoteGA
 
     constructor(public service: PrimaryServiceMock, public uuid: string) {
         super();
-        this.value = new Uint8Array(1).buffer;
+        this.value = new DataView(new Uint8Array(1).buffer);
     }
 
     public startNotifications(): Promise<BluetoothRemoteGATTCharacteristic> {
@@ -57,17 +57,17 @@ export class CharacteristicMock extends EventTarget implements BluetoothRemoteGA
     }
 
     public writeValue(value: ArrayBuffer) {
-        this.value = value;
+        this.value = new DataView(new Uint8Array(value));
         return Promise.resolve();
     }
 
     public writeValueWithResponse(value: ArrayBuffer) {
-        this.value = value;
+        this.value = new DataView(new Uint8Array(value));
         return Promise.resolve();
     }
 
     public writeValueWithoutResponse(value: ArrayBuffer) {
-        this.value = value;
+        this.value = new DataView(new Uint8Array(value));
         return Promise.resolve();
     }
 
